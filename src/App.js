@@ -10,34 +10,34 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Tasks from "./components/Tasks";
 import NewTask from "./components/NewTask";
+import Footer from "./components/Footer";
+import EditTask from "./components/EditTask";
 import './App.css';
 
 class App extends React.Component{
   state = {
-    tasks: [],
-    page: 0
+    tasks: []
   };
-
-  submitTask = (task)=>{
-
-    fetch('https://127.0.0.1:8000/newTask', {method: 'POST', body: JSON.stringify(task),
-      headers: {
-        'Content-type': 'text/plain'
-      }})
-        .then(res => res.json())
-        .then((data) => {
-        })
-        .catch(console.log)
-  }
 
   componentDidMount(){
     fetch('https://127.0.0.1:8000/getTasks').then(res=>res.json()).then(
         (data)=>{
-          this.setState({data, this.state.page});
+          this.setState({data});
         }
     )
   }
   render() {
+    const submitTask = (task)=>{
+
+      fetch('https://127.0.0.1:8000/newTask', {method: 'POST', body: JSON.stringify(task),
+        headers: {
+          'Content-type': 'text/plain'
+        }})
+          .then(res => res.json())
+          .then((data) => {
+          })
+          .catch(console.log)
+    }
     return (
         <Router>
           <div className="App">
@@ -55,9 +55,14 @@ class App extends React.Component{
               <Route
                   exact
                   path="/"
-                  render={(tasks) => <Tasks tasks={tasks}/>}
+                  render=<Main />}
               />
+              <Route
+                  exact path="/tasks" render={(tasks) => <Tasks tasks={tasks}/>}
+              />
+              <Route exact path="/edit" render={<EditTask/>}/>
             </Switch>
+            <Footer/>
           </div>
         </Router>
     );

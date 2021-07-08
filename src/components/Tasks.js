@@ -2,13 +2,14 @@ import React, {useState} from "react";
 
 class Tasks extends React.Component {
     state = {
-        tasks: []
+        tasks: [],
+        page: 0
     }
     componentDidMount(){
-        fetch('https://127.0.0.1:8000/getTasks')
+        fetch('https://127.0.0.1:8000/getTasks/'+ this.state.page)
             .then(res => res.json())
             .then((data) => {
-                this.setTasks({ tasks: data })
+                this.setState({ tasks: data })
             })
             .catch(console.log)
     }
@@ -19,13 +20,17 @@ class Tasks extends React.Component {
                 <h1>
                     Tasks List
                 </h1>
-                <ul>
-                    {this.state.tasks.map(task => (
-                        <li key={task.id}>
-                            <h2>{task.title}</h2>
-                        </li>
-                    ))}
-                </ul>
+                {this.state.tasks.length === 0 ?
+                    (<h2> Task list is empty</h2>) :
+                    (<ul>
+                        {this.state.tasks.map(task => (
+                            <li id={task.id}>
+                                task.title
+                            </li>
+                        ))}
+                    </ul>)
+                }
+
             </div>
         );
     }

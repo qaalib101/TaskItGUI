@@ -1,6 +1,6 @@
 import React from "react";
 
-class EditTask extends React.Component{
+class Footer extends React.Component{
 
     render(){
         return(
@@ -9,4 +9,4 @@ class EditTask extends React.Component{
     }
 }
 
-export default EditTask;
+export default Footer;
