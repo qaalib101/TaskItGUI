@@ -44,23 +44,23 @@ class App extends React.Component{
             <Header />
             <Switch>
               <Route
-                  exact
-                  path="/new"
-                  render={() => <NewTask
-                      submitTask={submitTask}
-                      task={{title: "",description:"", comments:"",
-                        dueDate:"01/01/2000"}}
-                  />}
+                  exact path="/new"
+                  render={() => {<NewTask submitTask={submitTask}
+                                          task={{title: "",description:"", comments:"", dueDate:"01/01/2000"}}
+                  />}}
               />
               <Route
-                  exact
-                  path="/"
-                  render=<Main />}
+                  exact path="/"
+                  render={() => <Main />}
               />
               <Route
-                  exact path="/tasks" render={(tasks) => <Tasks tasks={tasks}/>}
-              />
-              <Route exact path="/edit" render={<EditTask/>}/>
+                  exact path="/tasks"
+              >
+                <Tasks tasks={this.state.tasks}/>
+              </Route>
+              <Route exact path="/edit">
+                <EditTask/>
+              </Route>
             </Switch>
             <Footer/>
           </div>

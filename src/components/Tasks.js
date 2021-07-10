@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 
 class Tasks extends React.Component {
     state = {
@@ -16,12 +17,20 @@ class Tasks extends React.Component {
 
     render() {
         return(
-            <div className="tasks container">
+            <div className="tasks-container">
                 <h1>
                     Tasks List
                 </h1>
                 {this.state.tasks.length === 0 ?
-                    (<h2> Task list is empty</h2>) :
+                    (<div className="task-list-empty">
+                        <form action={"/new"}>
+                        <h2>Task list is empty</h2>
+                            <p>Click here to create a new task
+                                <input type="submit" value="Click here" />
+                            </p>
+                        </form>
+                    </div>
+                    ) :
                     (<ul>
                         {this.state.tasks.map(task => (
                             <li id={task.id}>
